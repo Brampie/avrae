@@ -1,0 +1,10 @@
+embed
+
+<drac2>
+errM = f"\nActive Character: {name}\n`{ctx.prefix}{ctx.alias}`"
+inputNumber = int("&1&") if "&1&".isdigit() else err(f"You didn't input a number! {errM}")
+</drac2>
+
+-title "XP is increased by 10%!"
+-desc "{{inputNumber}} x 1.1 = {{floor(inputNumber * 1.1)}}"
+-thumb <image>
