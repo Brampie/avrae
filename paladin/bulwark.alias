@@ -1,0 +1,20 @@
+embed 
+<drac2>
+c=combat()
+Cha=charismaMod
+errM = f"\nActive Character: {name}\n`{ctx.prefix}{ctx.alias}`"
+if "&1&".isdigit():
+    hp=int("&1&")
+else:
+    hp=int('0')
+a=argparse(&ARGS&)
+t=a.last("t")
+t=c.get_combatant(t) if c and t else err(f"You don't have a target to protect. {errM}")
+ch=character()
+</drac2>
+
+-title "<name> protects {{t.name}} with their Unerring Bulwark!" 
+-desc "{{f'**Damage Prevented:** {Cha}'}}" 
+-f "Effect|Starting at 7th level, your mere presence is empowering to your allies. While you are conscious, whenever a creature within 10 feet of you is hit with an attack, you can reduce that damage by an amount equal to your Charisma modifer. This effect applies after applying resistances and vulnerabilities. At 18th level, the range of this aura increases to 30 feet." 
+{{t.modify_hp(Cha,0,0)}}
+-footer "{{t}} | !defend -t combatant" -color <color> -thumb <image>
