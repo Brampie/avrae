@@ -1,0 +1,27 @@
+embed
+<drac2>
+i='-i' in &ARGS&
+cc="Ascendant Defender"
+ch=character()
+c=combat()
+
+if ch.cc_exists(cc):
+    ''
+else:
+    err(f'You do not have this feature.')
+if i:
+    ''
+elif ch.cc_exists(cc) and ch.get_cc(cc):
+    ch.mod_cc(cc,-1)
+else:
+    err(f'No charges remaining.\n**You must finish a long rest before using this feature again.**')
+
+ch.set_temp_hp(25)
+c.me.add_effect('Ascendant Defender', duration=10, buttons=[{"label":"25 temp HP", "verb":"gains temp HP", "style":4, "automation":[{"type":"target", "target":"self", "effects":[{"type":"temphp", "amount":"25"}]}]}]) if c and c.me else ''
+</drac2>
+
+-desc "{{f"{name} uses their Ascendant Defender! \nYou channel the energy of the world around you to gain the following benefits for a minute as an action:\n\nAt the end of each of your turns, you gain 25 temporary hit points.\n\nWhenever a creature you can see within 20 feet of you is hit with an attack, you can use your reaction to redirect the attack to you, potentially causing it to miss.\n\nWhen you reduce a creature to 0 hit points, you can cause a creature you can see within 30 feet of you to regain a number of hit points equal to 3d8 + your Charisma modifier."}}"
+-f "Use ``!ascdefend redirect -t [combatant] -a [attack roll] -d [damage]`` for the redirect ability and ``!ascdefend heal [combatant]`` for the healing ability"
+-f "Hit Points|{{ch.hp_str()}}|inline"
+-f "{{cc}}|{{"Ignored" if i else ch.cc_str(cc) if ch.cc_exists(cc) else "*None*"}}" 
+-footer "!ascdefender [-i]" -color <color> -thumb <image>
