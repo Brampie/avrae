@@ -1,0 +1,24 @@
+embed
+<drac2>
+i='-i' in &ARGS&
+cc="Channel Divinity"
+ch=character()
+c=combat()
+
+if ch.cc_exists(cc):
+    ''
+else:
+    err(f'You do not have this feature.')
+if i:
+    ''
+elif ch.cc_exists(cc) and ch.get_cc(cc):
+    ch.mod_cc(cc,-1)
+else:
+    err(f'No charges remaining.\n**You must short or long rest before using this feature again.**')
+
+c.me.add_effect('Sapping Strikes', duration=10) if c and c.me else ''
+</drac2>
+
+-desc "{{f"{name} uses their Sapping Strikes! \nYou can use your Channel Divinity as a bonus action to steal your enemy's vitality, granting it to your allies. Once per turn, when you hit a creature with a weapon attack, you can give a creature of your choice that you can see a number of temporary hit points equal to your proficiency bonus. This effect lasts for one minute.\nUse ``!sappingstrikes heal -t [combattant]`` to add temp hp."}}"
+-f "{{cc}}|{{"Ignored" if i else ch.cc_str(cc) if ch.cc_exists(cc) else "*None*"}}" 
+-footer "!sappingstrikes [-i]" -color <color> -thumb <image>
