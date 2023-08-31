@@ -1,0 +1,17 @@
+embed 
+<drac2>
+c=combat()
+a=argparse(&ARGS&)
+t=a.last("t")
+if c and t:
+    t=c.get_combatant(t)
+else:
+    err(f"You did not put in a target")
+ch=character()
+t.set_temp_hp(proficiencyBonus)
+</drac2>
+
+-title "<name> Saps the enemy and provides {{t.name}} with temporary HP!" 
+-f "Once per turn, when you hit a creature with a weapon attack, you can give a creature of your choice that you can see a number of temporary hit points equal to your proficiency bonus." 
+-f "Hit Points|{{t.hp_str()}}|inline"
+-footer "!sappingstrikes heal -t [combatant]" -color <color> -thumb <image>
