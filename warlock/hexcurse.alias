@@ -1,0 +1,24 @@
+embed
+<drac2>
+i='-i' in &ARGS&
+s='spread' in &ARGS&
+a=argparse(&ARGS&)
+cc="Hexblade's Curse" or err(f"You do not have this feature")
+c=combat()
+t= "&1&" if any(c.isalpha() or c.isdigit for c in "&1&") else err(f"You didn't input a target!")
+t=c.get_combatant(t)
+ch=character()
+
+if i or s:
+    ''
+elif ch.cc_exists(cc) and ch.get_cc(cc):
+    ch.mod_cc(cc,-1)
+else:
+    err(f'No charges remaining.\n**You must finish a short rest before using this feature again.**')
+t.add_effect("Hexblade's Curse", duration=10)
+</drac2>
+
+-title "<name> uses their Hexblade Curse!"
+-desc "{{f"As a bonus action, choose one creature you can see within 30 feet of you. The target is cursed for 1 minute. The curse ends early if the target dies, you die, or you are incapacitated. Until the curse ends, you gain the following benefits:\nYou gain a bonus to damage rolls against the cursed target. The bonus equals your proficiency bonus.\nAny attack roll you make against the cursed target is a critical hit on a roll of 19 or 20 on the d20.\nIf the cursed target dies, you regain hit points equal to your warlock level + your Charisma modifier (minimum of 1 hit point)."}}"
+-f "{{cc}}|{{"Ignored" if i else "" if s else ch.cc_str(cc)}}" 
+-footer "!hexcurse [spread] [-i]" -color <color> -thumb <image>
