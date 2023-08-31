@@ -1,0 +1,15 @@
+<drac2>
+cc='Blessing of Moonfire'
+ch=character()
+ch.create_cc_nx(cc, 0, proficiencyBonus, "long", "bubble")
+if not ch.get_cc_max(cc)==proficiencyBonus:
+    dif=proficiencyBonus-ch.get_cc_max(cc)
+    ch.edit_cc(cc, 0, proficiencyBonus)
+    ch.mod_cc(cc,dif) 
+else:
+    ""
+ch.mod_cc(cc,-1) if ch.cc(cc).value else err(f"You don't have any charges left!")
+</drac2>
+-d {{floor(proficiencyBonus/2)}}d6[cold]
+-f "Blessing of Moonfire | Once per turn when you hit a creature with an attack, you can deal additional cold damage to the target in addition to the attack's regular damage."
+-f "{{cc}}-1|{{ch.cc_str(cc)}}"
